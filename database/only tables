@@ -1,0 +1,191 @@
+CREATE TABLE admin (
+  id int(21) NOT NULL,
+  adminName varchar(21) NOT NULL,
+  profilePic varchar(255) DEFAULT NULL,
+  email varchar(35) NOT NULL,
+  phone bigint(20) NOT NULL,
+  password varchar(255) NOT NULL,
+  joinDate datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE categories (
+  categorieId int(12) NOT NULL,
+  categorieName varchar(255) NOT NULL,
+  categorieImage varchar(255) DEFAULT NULL,
+  categorieDesc text NOT NULL,
+  categorieCreateDate datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE contact (
+  contactId int(21) NOT NULL,
+  userId int(21) NOT NULL,
+  email varchar(35) NOT NULL,
+  phoneNo bigint(21) NOT NULL,
+  orderId int(21) NOT NULL DEFAULT 0 COMMENT 'If problem is not related to the order then order id = 0',
+  message text NOT NULL,
+  time datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('new','resolved') NOT NULL DEFAULT 'new'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE contactreply (
+  id int(21) NOT NULL,
+  contactId int(21) NOT NULL,
+  userId int(21) NOT NULL,
+  message text NOT NULL,
+  datetime datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE delivery_boys (
+  id int(11) NOT NULL,
+  delivery_boy_name varchar(50) NOT NULL,
+  first_name varchar(50) NOT NULL,
+  last_name varchar(50) NOT NULL,
+  email varchar(100) NOT NULL,
+  phone varchar(15) NOT NULL,
+  password varchar(255) NOT NULL,
+  vehicle_type varchar(3) DEFAULT NULL,
+  status enum('pending','approved','rejected') DEFAULT 'pending',
+  created_at timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE feedback (
+  feedback_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  rating enum('1','2','3','4','5') NOT NULL COMMENT '1 = Worst, 5 = Best',
+  comment text NOT NULL,
+  submission_date datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('pending','approved','rejected') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE item (
+  itemId int(12) NOT NULL,
+  itemName varchar(255) NOT NULL,
+  itemImage varchar(255) DEFAULT NULL,
+  itemPrice int(12) NOT NULL,
+  itemDesc text NOT NULL,
+  itemCategorieId int(12) NOT NULL,
+  itemPubDate datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('available','unavailable') NOT NULL DEFAULT 'available'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE likes (
+  id int(11) NOT NULL,
+  userId int(11) NOT NULL,
+  itemId int(11) NOT NULL,
+  created_at timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE orderitems (
+  id int(21) NOT NULL,
+  orderId int(21) NOT NULL,
+  itemId int(21) NOT NULL,
+  itemQuantity int(100) NOT NULL,
+  size varchar(255) NOT NULL DEFAULT 'M',
+  status enum('available','out_of_stock') NOT NULL DEFAULT 'available'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE orders (
+  orderId int(11) NOT NULL,
+  userId int(21) NOT NULL,
+  address varchar(255) NOT NULL,
+  zipCode int(21) NOT NULL,
+  phoneNo bigint(21) NOT NULL,
+  amount decimal(10,2) DEFAULT NULL,
+  payment_id varchar(100) DEFAULT NULL,
+  paymentMode enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=cod,1=online',
+  orderStatus enum('0','1','2','3','4','5','6') NOT NULL DEFAULT '0',
+  size enum('S','M','L') NOT NULL DEFAULT 'M',
+  createdAt datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('pending','completed','cancelled') NOT NULL DEFAULT 'pending',
+  delivery_boy_id int(11) DEFAULT NULL,
+  deliveryTime int(11) DEFAULT NULL COMMENT 'Delivery time in minutes'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE reviews (
+  reviewId int(11) NOT NULL,
+  userId int(21) NOT NULL,
+  orderId int(21) NOT NULL,
+  rating int(1) NOT NULL CHECK (rating between 1 and 5),
+  complain text DEFAULT NULL COMMENT 'User complaint or feedback',
+  reviewDate datetime NOT NULL DEFAULT current_timestamp(),
+  delivery_boy_id int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE sitedetail (
+  tempId int(11) NOT NULL,
+  systemName varchar(21) NOT NULL,
+  email varchar(35) NOT NULL,
+  contact1 bigint(21) NOT NULL,
+  contact2 bigint(21) DEFAULT NULL COMMENT 'Optional',
+  address text NOT NULL,
+  dateTime datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE users (
+  id int(21) NOT NULL,
+  username varchar(21) NOT NULL,
+  firstName varchar(21) NOT NULL,
+  lastName varchar(21) NOT NULL,
+  profilePic varchar(255) DEFAULT NULL,
+  email varchar(35) NOT NULL,
+  phone bigint(20) NOT NULL,
+  password varchar(255) NOT NULL,
+  joinDate datetime NOT NULL DEFAULT current_timestamp(),
+  status enum('active','blocked') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE viewcart (
+  cartItemId int(11) NOT NULL,
+  itemId int(11) NOT NULL,
+  itemQuantity int(100) NOT NULL,
+  userId int(11) NOT NULL,
+  addedDate datetime NOT NULL DEFAULT current_timestamp(),
+  size varchar(250) NOT NULL DEFAULT 'S M L'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE categories
+  ADD PRIMARY KEY (categorieId);
+ALTER TABLE admin
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY email (email);
+ALTER TABLE categories
+  ADD PRIMARY KEY (categorieId); 
+ALTER TABLE contact
+  ADD PRIMARY KEY (contactId),
+  ADD KEY userId (userId),
+  ADD KEY orderId (orderId);ALTER TABLE contactreply
+  ADD PRIMARY KEY (id),
+  ADD KEY contactId (contactId),
+  ADD KEY userId (userId);ALTER TABLE delivery_boys
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY email (email),
+  ADD UNIQUE KEY phone (phone);ALTER TABLE feedback
+  ADD PRIMARY KEY (feedback_id),
+  ADD KEY user_id (user_id);
+ALTER TABLE item
+  ADD PRIMARY KEY (itemId),
+  ADD KEY pizzaCategorieId (itemCategorieId);ALTER TABLE likes
+  ADD PRIMARY KEY (id),
+  ADD KEY userId (userId),
+  ADD KEY pizzaId (itemId);ALTER TABLE orderitems
+  ADD PRIMARY KEY (id),
+  ADD KEY orderId (orderId),
+  ADD KEY pizzaId (itemId);ALTER TABLE orders
+  ADD PRIMARY KEY (orderId),
+  ADD KEY userId (userId),
+  ADD KEY delivery_boy_id (delivery_boy_id);ALTER TABLE reviews
+  ADD PRIMARY KEY (reviewId),
+  ADD KEY userId (userId),
+  ADD KEY orderId (orderId),
+  ADD KEY reviews_ibfk_3 (delivery_boy_id);ALTER TABLE users
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY email (email),
+  ADD UNIQUE KEY phone (phone);ALTER TABLE viewcart
+  ADD PRIMARY KEY (cartItemId),
+  ADD KEY pizzaId (itemId),
+  ADD KEY userId (userId);ALTER TABLE admin
+  MODIFY id int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;ALTER TABLE categories
+  MODIFY categorieId int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;ALTER TABLE contact
+  MODIFY contactId int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;ALTER TABLE contactreply
+  MODIFY id int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;ALTER TABLE delivery_boys
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;ALTER TABLE feedback
+  MODIFY feedback_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;ALTER TABLE item
+  MODIFY itemId int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;ALTER TABLE likes
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;ALTER TABLE orderitems
+  MODIFY id int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;ALTER TABLE orders
+  MODIFY orderId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;ALTER TABLE reviews
+  MODIFY reviewId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;ALTER TABLE users
+  MODIFY id int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;ALTER TABLE viewcart
+  MODIFY cartItemId int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;ALTER TABLE contactreply
+  ADD CONSTRAINT contactreply_ibfk_1 FOREIGN KEY (contactId) REFERENCES contact (contactId) ON DELETE CASCADE,
+  ADD CONSTRAINT contactreply_ibfk_2 FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE;ALTER TABLE reviews
+  ADD CONSTRAINT reviews_ibfk_3 FOREIGN KEY (delivery_boy_id) REFERENCES delivery_boys (id) ON DELETE SET NULL;
+COMMIT;

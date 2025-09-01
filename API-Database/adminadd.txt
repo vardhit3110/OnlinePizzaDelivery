@@ -1,0 +1,68 @@
+<?php
+include "_dbconnect.php";
+
+header("Content-Type: application/json");
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode([
+        "Status" => "Request Error",
+        "Message" => "Please change request method to POST."
+    ]);
+    exit();
+}
+
+// Collect and sanitize inputs
+$adminName = trim($_POST['adminName'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
+$password = $_POST['password'] ?? '';
+
+// Validate inputs
+if (empty($adminName) || empty($email) || empty($phone) || empty($password)) {
+    echo json_encode([
+        "Status" => "Error",
+        "Message" => "All fields are required."
+    ]);
+    exit();
+}
+
+// Optional: email and phone format validation
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode([
+        "Status" => "Error",
+        "Message" => "Invalid email format."
+    ]);
+    exit();
+}
+
+if (!preg_match("/^[0-9]{10}$/", $phone)) {
+    echo json_encode([
+        "Status" => "Error",
+        "Message" => "Phone number must be 10 digits."
+    ]);
+    exit();
+}
+
+// Hash password
+$password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+// Prepare and bind to prevent SQL injection
+$stmt = $conn->prepare("INSERT INTO admin (adminName, email, phone, password) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $adminName, $email, $phone, $password_hash);
+
+// Execute and check result
+if ($stmt->execute()) {
+    echo json_encode([
+        "Status" => "Success",
+        "Message" => "Record inserted successfully."
+    ]);
+} else {
+    echo json_encode([
+        "Status" => "Error",
+        "Message" => "Failed to insert record: " . $stmt->error
+    ]);
+}
+
+$stmt->close();
+$conn->close();
+?>
