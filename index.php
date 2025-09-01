@@ -58,7 +58,7 @@
             <h2 class="fw-bold">Our Delicious Menu</h2>
         </div>
 
-        <!-- Veg Items with Slider -->
+        <!-- Veg Items with Sliderbar -->
         <div class="menu-container">
             <h3 class="text-success text-center"></h3>
             <div class="slider-wrapper">
