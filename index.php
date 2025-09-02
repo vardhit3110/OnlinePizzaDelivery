@@ -58,7 +58,7 @@
             <h2 class="fw-bold">Our Delicious Menu</h2>
         </div>
 
-        <!-- Veg Items with Sliderbar -->
+        <!-- Veg Items with Slider -->
         <div class="menu-container">
             <h3 class="text-success text-center"></h3>
             <div class="slider-wrapper">
@@ -130,7 +130,7 @@
             ?>
         </div>
     </div>
-
+<!-- files  -->
     <?php include 'partials/_signupModal.php'; ?>
     <?php include 'partials/_loginModal.php'; ?>
     <?php include 'partials/_forgot_pass.php'; ?>
