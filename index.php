@@ -130,7 +130,7 @@
             ?>
         </div>
     </div>
-<!-- files  -->
+
     <?php include 'partials/_signupModal.php'; ?>
     <?php include 'partials/_loginModal.php'; ?>
     <?php include 'partials/_forgot_pass.php'; ?>
