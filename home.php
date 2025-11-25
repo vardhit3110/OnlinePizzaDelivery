@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,7 +25,7 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-    
+
     <?php include 'partials/_dbconnect.php'; ?>
     <?php require 'partials/_nav.php' ?>
     <!-- End Of Second Navigation -->
@@ -93,10 +94,8 @@
                                     <div class="flex-grow-1">
                                         BEVERAGES
                                         <p class="mt-2 mb-0">Complement your pizza with wid...
-
                                         </p>
                                     </div>
-
                                 </div>
                             </a>
                         </div>
@@ -144,4 +143,6 @@
     <!-- Pigga js -->
     <script src="pigga/assets/js/pigga.js"></script>
 </body>
+
 </html>
+https://www.instagram.com/_toxic.4uh_?igsh=MXYyd3hpZnJhODlmcg==

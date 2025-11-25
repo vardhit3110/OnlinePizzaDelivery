@@ -4,11 +4,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include('partials/_dbconnect.php');
 
-$adminName = "vardhit";
-$email = "vamjavardhit461@gmail.com";
-$phone = 8238648728;
-$rawPassword = "Vardhit@3110"; // User input password
-$hashedPassword = password_hash($rawPassword, PASSWORD_DEFAULT); // Hashing password
+$adminName = "admin";
+$email = "admin@gmail.com";
+$phone = 9876543210;
+$rawPassword = "Admin@123";
+$hashedPassword = password_hash($rawPassword, PASSWORD_DEFAULT);
 $status = "active";
 
 $sql = "INSERT INTO admin (adminName, email, phone, password, status) 

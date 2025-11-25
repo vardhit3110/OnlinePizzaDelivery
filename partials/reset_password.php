@@ -35,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Validate password strength
-    if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $newPassword)) {
-        $_SESSION['message'] = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
-        header("Location: /OnlinePizzaDelivery/index.php");
-        exit();
-    }
+    // if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/', $newPassword)) {
+    //     $_SESSION['message'] = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    //     header("Location: /OnlinePizzaDelivery/index.php");
+    //     exit();
+    // }
 
     // Hash the new password
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);

@@ -60,6 +60,7 @@ require 'partials/_dbconnect.php';
         }
         ?>
         <!-- Admin Cards -->
+        
         <div class="admin-card">
             <div class="admin-card-icon">
                 <i class="bx bx-user nav__icon"></i>

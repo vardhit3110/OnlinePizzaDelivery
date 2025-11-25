@@ -25,14 +25,13 @@
     <?php require 'partials/_nav.php'; ?>
 
     <!-- Message Display Section (Moved Below Navigation Bar) -->
-    <!-- Message Display Section (Moved Below Navigation Bar) -->
     <div class="container mt-3"> <?php if (!empty($_SESSION['signup_error'])): ?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert"> <strong>Error!</strong>
                 <?= htmlspecialchars($_SESSION['signup_error']); ?> <button type="button" class="close" data-dismiss="alert"
                     aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div>
             <?php unset($_SESSION['signup_error']); ?> <?php endif; ?>
         <?php if (!empty($_SESSION['signup_success'])): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert"zz>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" zz>
                 <strong>Success!</strong> <?= htmlspecialchars($_SESSION['signup_success']); ?>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -273,3 +272,4 @@
         }
     }
 </style>
+

@@ -152,7 +152,7 @@ error_reporting(E_ALL);?>
                         </div><br>
                         <!-- Go to Checkout Button -->
                         <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Go to Checkout</button>
-                        <!-- 🟢 Existing Checkout Modal for Cash On Delivery -->
+                        <!--  Existing Checkout Modal for Cash On Delivery -->
                         <?php require 'partials/_checkoutModal.php'; ?>
                         <?php require 'partials/onlinePaymentModal.php';?>
                     </div>

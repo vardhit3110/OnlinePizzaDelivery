@@ -101,7 +101,6 @@
                     </div>
                 </form>
             </div>
-            <!-- FORM Panel -->
 
             <!-- Table Panel -->
             <div class="col-md-8" id="scroll">
@@ -129,6 +128,7 @@
                                     $itemCategorieId = $row['itemCategorieId'];
                                     $itemStatus = $row['status'];
 
+                                    
                                     echo '<tr>
                                             <td class="text-center">' . $itemCategorieId . '</td>
                                             <td class="text-center">
@@ -182,6 +182,7 @@ while ($itemRow = mysqli_fetch_assoc($itemResult)) {
     ?>
 
     <!-- Modal -->
+     
     <div class="modal fade" id="updateItem<?php echo $itemId; ?>" tabindex="-1" role="dialog"
         aria-labelledby="updateItem<?php echo $itemId; ?>" aria-hidden="true">
         <div class="modal-dialog" role="document">
