@@ -64,14 +64,13 @@
                         "6" => "cancelled"
                     ];
 
-                    // Determine badge color based on status
                     $badgeClass = '';
                     if ($orderStatus == 4 || $orderStatus == 1) {
-                        $badgeClass = 'badge-success'; // Green for completed
+                        $badgeClass = 'badge-success';
                     } elseif ($orderStatus == 5 || $orderStatus == 6) {
-                        $badgeClass = 'badge-danger'; // Red for cancelled
+                        $badgeClass = 'badge-danger';
                     } else {
-                        $badgeClass = 'badge-warning'; // Yellow for pending
+                        $badgeClass = 'badge-warning';
                     }
 
                     echo '<tr>
@@ -94,7 +93,6 @@
                         $selected = ($boy['id'] == $deliveryBoyId) ? "selected" : "";
                         echo '<option value="' . $boy['id'] . '" ' . $selected . '>' . $boy['first_name'] . ' ' . $boy['last_name'] . '</option>';
                     }
-
                     echo '</select>
                                         <button type="submit" class="btn btn-sm btn-success">Assign</button>
                                     </form>
@@ -170,7 +168,6 @@
                 }
 
                 echo '<tr>
-                    <td>' . $orderId . '</td>
                     <td>' . $Id . '</td>
                     <td data-toggle="tooltip" title="' . $address . '">' . $address . '</td>
                     <td>' . $phoneNo . '</td>

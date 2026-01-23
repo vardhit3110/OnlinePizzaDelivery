@@ -218,6 +218,7 @@ while ($itemRow = mysqli_fetch_assoc($itemResult)) {
                             <input class="form-control" id="name" name="name" value="<?php echo $itemName; ?>" type="text"
                                 required>
                         </div>
+                        
                         <div class="text-left my-2 row">
                             <div class="form-group col-md-6">
                                 <b><label for="price">Price</label></b>

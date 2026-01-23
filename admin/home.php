@@ -60,7 +60,7 @@ require 'partials/_dbconnect.php';
         }
         ?>
         <!-- Admin Cards -->
-        
+
         <div class="admin-card">
             <div class="admin-card-icon">
                 <i class="bx bx-user nav__icon"></i>
@@ -130,12 +130,7 @@ require 'partials/_dbconnect.php';
     <script>
         <?php
         // Find top 5 most sold items
-        $topSoldQuery = "
-    SELECT i.itemName, SUM(o.itemQuantity) AS totalSold 
-    FROM orderitems o
-    JOIN item i ON o.itemId = i.itemId
-    GROUP BY o.itemId    ORDER BY totalSold DESC 
-    LIMIT 5";
+        $topSoldQuery = "SELECT i.itemName, SUM(o.itemQuantity) AS totalSold FROM orderitems o JOIN item i ON o.itemId = i.itemId GROUP BY o.itemId    ORDER BY totalSold DESC LIMIT 5";
         $topSoldResult = mysqli_query($conn, $topSoldQuery);
 
         $itemNames = [];
